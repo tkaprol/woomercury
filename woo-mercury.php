@@ -2,10 +2,10 @@
 /*
  * Plugin Name: Woo Mercury
  * Version: 1.0
- * Plugin URI: http://www.hughlashbrooke.com/
- * Description: This is your starter template for your next WordPress plugin.
- * Author: Hugh Lashbrooke
- * Author URI: http://www.hughlashbrooke.com/
+ * Plugin URI: http://tolga.kaprol.net
+ * Description: Increases cart total by %10 if selected item is in the cart.
+ * Author: Tolga Kaprol
+ * Author URI: http://tolga.kaprol.net
  * Requires at least: 4.0
  * Tested up to: 4.0
  *
@@ -13,7 +13,7 @@
  * Domain Path: /lang/
  *
  * @package WordPress
- * @author Hugh Lashbrooke
+ * @author Tolga Kaprol
  * @since 1.0.0
  */
 
