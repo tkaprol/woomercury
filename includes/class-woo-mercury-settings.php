@@ -67,7 +67,7 @@ class Woo_Mercury_Settings {
 	 * @return void
 	 */
 	public function add_menu_item () {
-		$page = add_options_page( __( 'Plugin Settings', 'woo-mercury' ) , __( 'Plugin Settings', 'woo-mercury' ) , 'manage_options' , $this->parent->_token . '_settings' ,  array( $this, 'settings_page' ) );
+		$page = add_options_page( __( 'Woo Mercury Settings', 'woo-mercury' ) , __( 'Woo Mercury Settings', 'woo-mercury' ) , 'manage_options' , $this->parent->_token . '_settings' ,  array( $this, 'settings_page' ) );
 		add_action( 'admin_print_styles-' . $page, array( $this, 'settings_assets' ) );
 	}
 
@@ -115,10 +115,22 @@ class Woo_Mercury_Settings {
 					'id' 			=> 'increasing_product',
 					'label'			=> __( 'Products', 'woo-mercury' ),
 					'description'	=> __( 'Please select the product', 'woo-mercury' ),
-					'type'			=> 'select'
+					'type'			=> 'select',
+					'options'		=> array(''=>__( 'Please Select', 'woo-mercury' ))
 				)
 			)
 		);
+
+		// get all WooCommerce Products
+		$loop = new WP_Query( array( 'post_type' => array('product'), 'posts_per_page' => -1 ) );
+
+		while ( $loop->have_posts() ) : $loop->the_post();
+			$theid = get_the_ID();
+			$product = new WC_Product($theid);
+
+			$settings['increase']['fields'][0]['options'][$theid]=$product->get_title();
+
+		endwhile;
 
 		$settings = apply_filters( $this->parent->_token . '_settings_fields', $settings );
 
@@ -183,7 +195,7 @@ class Woo_Mercury_Settings {
 
 		// Build page HTML
 		$html = '<div class="wrap" id="' . $this->parent->_token . '_settings">' . "\n";
-			$html .= '<h2>' . __( 'Plugin Settings' , 'woo-mercury' ) . '</h2>' . "\n";
+			$html .= '<h2>' . __( 'Woo Mercury' , 'woo-mercury' ) . '</h2>' . "\n";
 
 			$tab = '';
 			if ( isset( $_GET['tab'] ) && $_GET['tab'] ) {
