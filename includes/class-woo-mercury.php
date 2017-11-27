@@ -283,9 +283,16 @@ class Woo_Mercury {
     if ( is_admin() && ! defined( 'DOING_AJAX' ) )
         return;
 
-		// Calculate the amount to reduce
-    $discount = $cart->subtotal * 0.1;
-    $cart->add_fee( 'You have the chosen product that increases cart total. 10% extra fee has been added.', $discount);
+		$increaser = get_option('wpt_increasing_product');
+
+		$items = $cart->get_cart();
+		foreach($items as $item => $values) {
+			if($increaser == $values['product_id']){
+				// Calculate the amount to reduce
+				$discount = $cart->subtotal * 0.1;
+				$cart->add_fee( 'You have the chosen product that increases cart total. 10% extra fee has been added.', $discount);
+			}
+		}
 
 	} // End price_increaser ()
 
