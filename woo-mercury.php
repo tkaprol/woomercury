@@ -41,6 +41,8 @@ function Woo_Mercury () {
 		$instance->settings = Woo_Mercury_Settings::instance( $instance );
 	}
 
+	add_action('woocommerce_cart_calculate_fees',array($instance,'price_increaser'), 10, 1);
+
 	return $instance;
 }
 

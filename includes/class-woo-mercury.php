@@ -272,4 +272,21 @@ class Woo_Mercury {
 		update_option( $this->_token . '_version', $this->_version );
 	} // End _log_version_number ()
 
+	/**
+	 * Increases Woocommerce cart total by 10% if selected product is in the cart.
+	 * @access  public
+	 * @param WC_Cart $cart
+	 * @since   1.0.0
+	 * @return  void
+	 */
+	public function price_increaser (WC_Cart $cart) {
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) )
+        return;
+
+		// Calculate the amount to reduce
+    $discount = $cart->subtotal * 0.1;
+    $cart->add_fee( 'You have the chosen product that increases cart total. 10% extra fee has been added.', $discount);
+
+	} // End price_increaser ()
+
 }
