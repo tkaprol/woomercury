@@ -291,6 +291,7 @@ class Woo_Mercury {
 				// Calculate the amount to reduce
 				$discount = $cart->subtotal * 0.1;
 				$cart->add_fee( 'You have the chosen product that increases cart total. 10% extra fee has been added.', $discount);
+				break;  // break foreach for unnecessary efforts
 			}
 		}
 
